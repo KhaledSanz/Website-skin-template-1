@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root{
+            --background-col: '';
+            --skin-img: url("ads/background101.webp");
+            --right-img1: url("ads/Images/parisxmadrid.jpeg");
+            --right-img2: url("ads/Images/londonxmadrid.jpeg");
+            --banner-img: url("ads/background101.webp");
+            --plane-img1: url("ads/Images/UAEplane.png");
+            --plane-img2: url("ads/Images/airbusplane.png");
+            --plane-img3: url("ads/Images/Boeingplane.png");
+            
+        }
+        #left-skin{
+            position:fixed; 
+            width: calc((100% - 1000px) /2); 
+            height:1000px; 
+            top:0px; 
+            left:0px; 
+            background-color: var(--background-col); 
+            background-image:var(--skin-img); 
+        } 
+        #right-skin{
+            position:fixed; 
+            width: calc((100% - 1000px) /2); 
+            height: 1000px; 
+            top: 0px; 
+            right: 0px; 
+            background-position-x: right;
+            background-color: var(--background-col);  
+            background-image:var(--skin-img); 
+        } 
+        #RightCA1 {
+            margin: auto;
+            margin-top: 50px;
+            background-color: var(--background-col);
+            background-image:var(--right-img2); 
+            width: 88%;
+            height: 194px;
+            background-blend-mode: lighten;
+            transform: scale(0.83);
+            cursor: pointer;
+            
+        }
+        #RightCA2 {
+            margin: auto;
+            background-color: var(--background-col);
+            background-image:var(--right-img1); 
+            width: 88%;
+            height: 194px;
+            margin-top: 50px;
+            background-blend-mode: lighten;
+            cursor: pointer;
+            transform: scale(0.9);
+        }
+        #RightCA3 {
+            margin: auto;
+            background-color: var(--background-col);
+            background-image:var(--right-img2); 
+            width: 88%;
+            height: 194px;
+            margin-top: 36px;
+            background-blend-mode: lighten;
+            cursor: pointer;
+            transform: scale(0.83);
+        }
+        #LeftCA1 {
+            background-image: var(--plane-img1);
+            margin: auto;
+            width: 74%;
+            height: 269px;
+            margin-top: -64px;
+            rotate: 13deg;
+            transform: translate(5%, 1%);
+            overflow: hidden;
+        }
+        #LeftCA2 {
+            background-image: var(--plane-img2);
+            margin: auto;
+            width: 74%;
+            height: 269px;
+            margin-top: 1px;
+            rotate: 10deg;
+            transform: translate(5%, 1%);
+            overflow: hidden;
+        }
+        #LeftCA3 {
+            background-image: var(--plane-img3);
+            margin: auto;
+            width: 74%;
+            height: 269px;
+            margin-top: 1px;
+            transform: translate(5%, 1%);
+            overflow: hidden;
+        }
+        #LeftCA1:hover {
+            transform: scale(1);
+        }
+        #LeftCA2:hover {
+            transform: scale(1);
+        }
+        #LeftCA3:hover {
+            transform: scale(1);
+        }
+        #RightCA1:hover {
+            background-color:navy;
+        }
+        #RightCA2:hover {
+            background-color:navy;
+        }
+        #RightCA3:hover {
+            background-color:navy;
+        }
+        #headContainer {
+            margin: auto;
+            background-color: var(--background-col);
+            background-image:var(--banner-img); 
+            width: 100%;
+            height: 260px;
+            margin-top: -250px;
+            background-blend-mode: lighten;
+        }
+        
+    </style>
+</head>
+<body>
+    <script>
+
+        //var skinBackgroundColour = "red";
+        //var skinImage = "ads/background101.webp";
+        //var rightImg1 = "ads/Images/parisxmadrid.jpeg";
+        //var rightImg2 = "ads/Images/londonxmadrid.jpeg";
+
+        // Create (div) markup and apply to body
+    var leftContainer = 
+        parent.document.createElement('div'); // div container created
+        leftContainer.id = 'left-skin'; // assigned id to container
+        parent.document.body.appendChild(leftContainer); // attached container to body.
+
+    var rightContainer = 
+        parent.document.createElement('div'); // div container created
+        rightContainer.id = 'right-skin'; // assigned id to container
+        parent.document.body.appendChild(rightContainer); // attached container to body.
+
+    var headerContainer = 
+        parent.document.createElement('div');
+        headerContainer.id = 'headContainer';
+        self.frameElement.parentNode.parentNode.appendChild(headerContainer);
+    // 
+
+
+        // Create (div) markup and apply to existing container div
+
+    var leftCon1 = 
+        parent.document.createElement('div');
+        leftCon1.id = 'LeftCA1';
+        leftContainer.appendChild(leftCon1);
+
+    var leftCon2 = 
+        parent.document.createElement('div');
+        leftCon2.id = 'LeftCA2';
+        leftContainer.appendChild(leftCon2);
+
+    var leftCon3 = 
+        parent.document.createElement('div');
+        leftCon3.id = 'LeftCA3';
+        leftContainer.appendChild(leftCon3);
+// break
+    var rightCon1 = 
+        parent.document.createElement('div');
+        rightCon1.id = 'RightCA1';
+        rightContainer.appendChild(rightCon1);
+
+    var rightCon2 = 
+        parent.document.createElement('div');
+        rightCon2.id = 'RightCA2';
+        rightContainer.appendChild(rightCon2);
+
+    var rightCon3 = 
+        parent.document.createElement('div');
+        rightCon3.id = 'RightCA3';
+        rightContainer.appendChild(rightCon3);
+
+    
+
+   
+        
+
+        var pageStyle = document.querySelectorAll('style')[0].innerHTML;
+        // style markup
+        var skinStyle = parent.document.createElement('style');
+        //skinStyle.innerHTML = `#left-skin{position:fixed; width: calc((100% - 1000px) /2); height:1000px; top:0px; left:0px; background-color: ${skinBackgroundColour}; background-image: url('${skinImage}');} #right-skin{position:fixed; width: calc((100% - 1000px) /2); height: 1000px; top: 0px; right: 0px; background-position-x: right; image background-color: ${skinBackgroundColour}; background-image: url('${skinImage}');} #RightCA1 {width: 100px; height: 100px; background-image: url('${rightImg1}'); width: 88%;height: 194px;}`;
+        skinStyle.innerHTML = pageStyle;
+
+        parent.document.head.appendChild(skinStyle);
+
+        
+        // add logic to markup
+
+        
+    </script>
+    <style>
+        .ad-background{
+            background:red;
+            width:100%;
+            height:250px;
+        }
+    </style>
+    <div class="ad-background">
+
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+    <title>Document</title>
+    <style>
+        .ad-container{
+            width:970px;
+            height:250px;
+            background-color: grey;
+        }
+
+        .video-container{
+            width:444px;
+            height:250px;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="ad-container">
+        <div class="video-container">
+            <video src="" id="im-video-content" playsinline muted style="display:none"></video>
+            <div id="im-ad-container"></div>
+        </div>
+    </div>
+    <script>
+
+let adRequestUrl;
+
+
+let videoContent;
+let adContainer;
+let adDisplayContainer;
+let adsLoader;
+let adsRequest;
+let adsManager;
+let w = 444;
+let h = 250;
+let google;
+
+
+document.addEventListener('DOMContentLoaded', start);
+
+function start(){
+    videoContent = document.querySelector('#im-video-content');
+    adContainer = document.querySelector('#im-ad-container');
+
+    initIMA();
+    injectAd();
+}
+
+function initIMA() {
+
+  google = window.google;
+
+  google.ima.settings.setDisableCustomPlaybackForIOS10Plus(true);
+  adDisplayContainer = new google.ima.AdDisplayContainer(adContainer);
+
+  adsLoader = new google.ima.AdsLoader(adDisplayContainer);
+  adsLoader.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR,onAdError,false);
+  adsLoader.addEventListener(google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED, onAdsManagerLoaded, false);
+
+}
+
+function onAdsManagerLoaded(adsManagerLoadedEvent){
+
+    var adsRenderingSettings = new google.ima.AdsRenderingSettings();
+    adsRenderingSettings.autoAlign = false;
+    adsRenderingSettings.restoreCustomPlaybackStateOnAdBreakComplete = true;
+    adsManager = adsManagerLoadedEvent.getAdsManager(videoContent, adsRenderingSettings);
+
+    adDisplayContainer.initialize();
+    
+    renderAd();
+
+}
+
+function renderAd(){
+
+    if(adsManager)
+    {
+        try{
+            adsManager.init(w, h, google.ima.ViewMode.NORMAL);
+            adsManager.start();
+        } 
+        catch (adError) {
+            onAdError(adError)
+        }
+    }
+
+}
+
+function injectAd() {
+
+  debugMessage("making ad call", adRequestUrl);
+
+  adsRequest = new google.ima.AdsRequest();
+
+  // GF test
+  adsRequest.adTagUrl = 'https://securepubads.g.doubleclick.net/gampad/ads?iu=/176986657/tracking.immediate.co.uk/flix/radiotimes&sz=1x1&cust_params=configuration%3Duat&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&url=[REFERRER_URL]&correlator=[TIMESTAMP]';
+  // standard preroll
+  //adsRequest.adTagUrl = 'https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/single_ad_samples&sz=640x480&cust_params=sample_ct%3Dlinear&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=';
+
+  adsRequest.setAdWillAutoPlay(true);
+  adsRequest.setAdWillPlayMuted(false);
+
+  adsLoader.requestAds(adsRequest);
+
+}
+
+function onAdError(e)
+{
+
+  debugMessage("video error:", e);
+  
+}
+
+function debugMessage(e, t) {
+    console.log("%c video %c " + e, "border-radius:5px;background-color:#68b455;color:white;", "color:#000"), null != t && console.dir(t);
+}
+    </script>
+</body>
+</html>
